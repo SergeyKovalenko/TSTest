@@ -22,6 +22,7 @@
 		E1B881CE1950A46A00CE810D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B881AD1950A46A00CE810D /* UIKit.framework */; };
 		E1B881D61950A46A00CE810D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1B881D41950A46A00CE810D /* InfoPlist.strings */; };
 		E1B881D81950A46A00CE810D /* Test_ProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B881D71950A46A00CE810D /* Test_ProjectTests.m */; };
+		E1B881EB1950A69100CE810D /* TSTPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B881EA1950A69100CE810D /* TSTPerson.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		E1B881D31950A46A00CE810D /* Test_ProjectTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Test_ProjectTests-Info.plist"; sourceTree = "<group>"; };
 		E1B881D51950A46A00CE810D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E1B881D71950A46A00CE810D /* Test_ProjectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test_ProjectTests.m; sourceTree = "<group>"; };
+		E1B881E91950A69100CE810D /* TSTPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPerson.h; sourceTree = "<group>"; };
+		E1B881EA1950A69100CE810D /* TSTPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPerson.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,7 @@
 		E1B881AF1950A46A00CE810D /* Test_Project */ = {
 			isa = PBXGroup;
 			children = (
+				E1B881E81950A69100CE810D /* Model */,
 				E1B881B81950A46A00CE810D /* TSTAppDelegate.h */,
 				E1B881B91950A46A00CE810D /* TSTAppDelegate.m */,
 				E1B881BB1950A46A00CE810D /* Main_iPhone.storyboard */,
@@ -153,6 +157,15 @@
 				E1B881D41950A46A00CE810D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E1B881E81950A69100CE810D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E1B881E91950A69100CE810D /* TSTPerson.h */,
+				E1B881EA1950A69100CE810D /* TSTPerson.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1B881EB1950A69100CE810D /* TSTPerson.m in Sources */,
 				E1B881BA1950A46A00CE810D /* TSTAppDelegate.m in Sources */,
 				E1B881C31950A46A00CE810D /* TSTViewController.m in Sources */,
 				E1B881B61950A46A00CE810D /* main.m in Sources */,
