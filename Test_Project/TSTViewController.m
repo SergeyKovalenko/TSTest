@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *pushButton;
 
-@property (strong, nonatomic) TSTPerson *person;
+@property (strong, nonatomic) NSMutableArray *personsArray;
 @property (strong, nonatomic) TSTPersonDescriptionFormatter *personDescriptionFormatter;
 
 @end
@@ -28,7 +28,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        _person = [[TSTPerson alloc] init];
+        _personsArray = [NSMutableArray array];
         _personDescriptionFormatter = [[TSTPersonDescriptionFormatter alloc] init];
     }
     return self;
@@ -50,26 +50,35 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if (textField == self.firstNameTextField)
-    {
-        self.person.firstName = self.firstNameTextField.text;
-    }
-    else
-    {
-        self.person.lastName = self.lastNameTextField.text;
-    }
+//    if (textField == self.firstNameTextField)
+//    {
+//        self.person.firstName = self.firstNameTextField.text;
+//    }
+//    else
+//    {
+//        self.person.lastName = self.lastNameTextField.text;
+//    }
 }
 
 - (IBAction)datePicked:(UIDatePicker *)sender
 {
-    self.person.birthDate = sender.date;
+//    self.person.birthDate = sender.date;
 }
 
 
 - (IBAction)displayPerson:(id)sender
 {
-    self.descriptionLabel.text = [self.personDescriptionFormatter descriptionStringFromPerson:self.person];
-    NSLog(@"%@", self.person);
+    TSTPerson *person = [TSTPerson new];
+    person.firstName = self.firstNameTextField.text;
+    person.lastName = self.lastNameTextField.text;
+    person.birthDate = self.birthdayPicker.date;
+    
+    [self.personsArray addObject:person];
+    
+    self.descriptionLabel.text = [NSString stringWithFormat:@"Number of persons in array: %i", [self.personsArray count]];
+    
+//    self.descriptionLabel.text = [self.personDescriptionFormatter descriptionStringFromPerson:self.person];
+//    NSLog(@"%@", self.person);
 }
 
 
