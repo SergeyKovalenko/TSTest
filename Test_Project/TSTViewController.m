@@ -8,6 +8,7 @@
 
 #import "TSTViewController.h"
 #import "TSTPerson.h"
+#import "TSTPersonDescriptionFormatter.h"
 
 @interface TSTViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
@@ -15,7 +16,10 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *birthdayPicker;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *pushButton;
+
 @property (strong, nonatomic) TSTPerson *person;
+@property (strong, nonatomic) TSTPersonDescriptionFormatter *personDescriptionFormatter;
+
 @end
 
 @implementation TSTViewController
@@ -25,6 +29,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         _person = [[TSTPerson alloc] init];
+        _personDescriptionFormatter = [[TSTPersonDescriptionFormatter alloc] init];
     }
     return self;
 }
@@ -63,7 +68,7 @@
 
 - (IBAction)displayPerson:(id)sender
 {
-    self.descriptionLabel.text = self.person.description;
+    self.descriptionLabel.text = [self.personDescriptionFormatter descriptionStringFromPerson:self.person];
     NSLog(@"%@", self.person);
 }
 
