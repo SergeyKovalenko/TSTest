@@ -7,15 +7,44 @@
 //
 
 #import "TSTAppDelegate.h"
+#import "TSTPerson.h"
 
 @implementation TSTAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    TSTPerson *person = [[TSTPerson alloc] init];
+    person.firstName = @"fwwefwf";
+    
+    [person addObserver:self
+             forKeyPath:@"firstName"
+                options:NSKeyValueObservingOptionNew
+                context:nil];
+    person.firstName = @"22";
+
+    
+//    id iii =  person.friends;
+//    [person addFriend:[person copy]];
+//
+//    [person addObserver:self
+//             forKeyPath:@"friends"
+//                options:NSKeyValueObservingOptionNew
+//                context:nil];
+//    [person addFriend:[person copy]];
+    
     return YES;
 }
-							
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+//    [super observeValueForKeyPath:keyPath
+//                         ofObject:object
+//                           change:change
+//                          context:context];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

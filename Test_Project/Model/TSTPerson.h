@@ -7,9 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TSTModel.h"
 
-@interface TSTPerson : NSObject
+@interface TSTPerson : TSTModel <NSCoding, NSCopying>
+
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *fullName;
+@property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSDate *birthDate;
+
+@property (nonatomic, strong, readonly) NSArray* friends;
+//@property (nonatomic, strong, readonly) NSArray* emails;
+//@property (nonatomic, strong, readonly) NSArray* phoneNumbers;
+
+- (void)addFriend:(TSTPerson *)value;
+- (void)removeFriend:(TSTPerson *)value;
+- (void)addFriends:(NSArray *)values;
+- (void)removeFriends:(NSArray *)values;
+
 @end
