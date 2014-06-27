@@ -7,15 +7,38 @@
 //
 
 #import "TSTAppDelegate.h"
+#import "TSTDataProvider.h"
+#import "TSTPerson.h"
+#import "TSTDataProvider+TSTFileUtils.h"
+
+@interface TSTAppDelegate ()
+
+@property (nonatomic, readwrite) TSTDataProvider *dataProvider;
+@end
 
 @implementation TSTAppDelegate
+
++ (TSTAppDelegate *)sharedDelegate
+{
+    return (TSTAppDelegate *) [[UIApplication sharedApplication] delegate];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+
     return YES;
 }
-							
+
+- (TSTDataProvider *)dataProvider
+{
+    if (!_dataProvider)
+    {
+        _dataProvider = [TSTDataProvider testDataProvider];
+    }
+    return _dataProvider;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -26,6 +49,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [self.dataProvider testSave];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

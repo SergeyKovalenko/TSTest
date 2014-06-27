@@ -8,8 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TSTPerson : NSObject
+@interface TSTPerson : NSObject <NSCopying, NSCoding>
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, readonly) NSString *fullName;
+@property (nonatomic, strong) NSString *email;
 @property (nonatomic, strong) NSDate *birthDate;
+
+- (BOOL)isEqualToPerson:(TSTPerson *)other;
+- (BOOL)validateEmail:(inout NSString **)ioValue error:(out NSError **)outError;
 @end
