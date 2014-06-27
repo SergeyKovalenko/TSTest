@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) TSTPerson *person;
 @property (nonatomic, strong) NSMutableArray *personChangedKeys;
+@property (nonatomic, strong) NSString *fullname;
 
 @end
 
@@ -87,6 +88,8 @@
     XCTAssertEqualObjects(self.personChangedKeys, array);
 }
 
+
+
 - (void)observableObjectWillChangeContent:(id <TSTObservable>)observable userInfo:(NSMutableDictionary *)userInfo
 {
     XCTAssertEqualObjects(self.person, observable);
@@ -100,4 +103,21 @@
     [self.personChangedKeys addObject:userInfo[TSTModelChangedKey]];
 }
 
+- (void)testObservableFullName
+{
+    [self.person addObserver:self forKeyPath:@"fullName" options:NSKeyValueObservingOptionNew context:nil];
+    
+    self.person.firstName = @"firstName";
+    self.person.lastName = @"lastName";
+    
+    XCTAssertEqualObjects(self.person.fullName, self.fullname );
+
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    XCTAssertEqualObjects(self.person, object);
+    XCTAssertEqualObjects(keyPath, @"fullName");
+    self.fullname = change[NSKeyValueChangeNewKey];
+}
 @end

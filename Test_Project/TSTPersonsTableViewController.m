@@ -11,8 +11,9 @@
 #import "TSTPerson.h"
 #import "TSTAppDelegate.h"
 
-@interface TSTPersonsTableViewController ()
-@property (nonatomic, strong) id <TSTDataProvider> dataProvider;
+@interface TSTPersonsTableViewController () <TSTListener>
+
+@property (nonatomic, strong) id <TSTDataProvider, TSTObservable> dataProvider;
 
 @end
 
@@ -31,14 +32,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.dataProvider = [TSTAppDelegate sharedDelegate].dataProvider;
 
+    self.dataProvider = [TSTAppDelegate sharedDelegate].dataProvider;
+    [self.dataProvider addListener:self];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = [self createAddButton];
+}
+
+- (UIBarButtonItem *)createAddButton
+{
+    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addPerson:)];
+}
+
+- (void)addPerson:(id)sender
+{
+    TSTPerson *person = [[TSTPerson alloc] init];
+    person.firstName = @"John";
+    person.lastName = @"Doe";
+    [self.dataProvider addObject:person];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,7 +63,6 @@
 }
 
 #pragma mark - Table view data source
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -67,28 +81,47 @@
     return cell;
 }
 
+- (void)observableObjectWillChangeContent:(id <TSTObservable>)observable userInfo:(NSMutableDictionary *)userInfo
+{
+    [self.tableView beginUpdates];
+}
 
-/*
-// Override to support conditional editing of the table view.
+- (void)observableObject:(id <TSTObservable>)observable didChangeObject:(id)anObject atIndex:(NSUInteger)index1 forChangeType:(TSTListenerChangeType)type userInfo:(NSMutableDictionary *)userInfo
+{
+    switch (type)
+    {
+        case TSTListenerChangeTypeInsert:
+            [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        case TSTListenerChangeTypeDelete:
+            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        case TSTListenerChangeTypeUpdate:
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+    }
+}
+
+- (void)observableObjectDidChangeContent:(id <TSTObservable>)observable userInfo:(NSMutableDictionary *)userInfo
+{
+    [self.tableView endUpdates];
+}
+
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
-// Override to support editing the table view.
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        [self.dataProvider removeObjectAtIndex:indexPath.row];
+    }
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
