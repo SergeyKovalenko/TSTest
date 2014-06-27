@@ -11,7 +11,7 @@
 @interface TSTModel : NSObject
 
 - (NSDictionary *)primitiveValues;
-- (id)primitiveValueForKey:(id)key;
-- (void)setPrinmitiveValue:(id <NSCoding>)value forKey:(id <NSCopying>)key;
+- (id)primitiveValueForKey:(NSString *)key;
+- (void)setPrinmitiveValue:(id <NSCoding>)value forKey:(NSString *)key;
 
 @end

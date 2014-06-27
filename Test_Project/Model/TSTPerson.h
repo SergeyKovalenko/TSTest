@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TSTModel.h"
 
-@interface TSTPerson : NSObject <NSCopying, NSCoding>
+@interface TSTPerson : TSTModel <NSCopying, NSCoding>
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

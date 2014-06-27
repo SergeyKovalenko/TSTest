@@ -12,7 +12,6 @@ static NSString *const kFirstNameKey = @"firstName";
 static NSString *const kLastNameKey = @"lastName";
 static NSString *const kBirthDateKey = @"birthDate";
 static NSString *const kEmailKey = @"email";
-static NSString *const kModelDictionaryKey = @"modelDictionary";
 
 static NSString *const kTSTPersonErrorDomain = @"TSTPersonErrorDomain";
 
@@ -20,72 +19,12 @@ typedef NS_ENUM(NSInteger, TSTPersonErrorCode) {
     TSTPersonErrorEmailCode
 };
 
-@interface TSTPerson ()
-
-@property (nonatomic, strong) NSMutableDictionary *modelDictionary;
-
-@end
-
 @implementation TSTPerson
 
-#pragma mark - NSObject
-
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary
-{
-    self = [super init];
-    if (self)
-    {
-        _modelDictionary = [[NSMutableDictionary alloc] initWithDictionary:dictionary];
-    }
-    return self;
-}
-
-- (id)init
-{
-    return [self initWithDictionary:nil];
-}
-
-- (NSUInteger)hash
-{
-    return self.modelDictionary.hash;
-}
-
-- (BOOL)isEqual:(id)object
-{
-    if (self == object)
-    {
-        return YES;
-    }
-
-    if ([self class] != [object class])
-    {
-        return NO;
-    }
-
-    return [self isEqualToPerson:object];
-
-}
-
-#pragma mark - NSCoding
-
-- (id)initWithCoder:(NSCoder *)coder
-{
-    self = [super init];
-    if (self)
-    {
-        self.modelDictionary = [coder decodeObjectForKey:kModelDictionaryKey];
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)coder
-{
-    [coder encodeObject:self.modelDictionary forKey:kModelDictionaryKey];
-}
 
 - (NSString *)description
 {
-    NSString *personInfo = [NSString stringWithFormat:@"%@", self.modelDictionary];
+    NSString *personInfo = [NSString stringWithFormat:@"%@", self.primitiveValues];
     return [[super description] stringByAppendingString:personInfo];
 }
 
@@ -93,48 +32,47 @@ typedef NS_ENUM(NSInteger, TSTPersonErrorCode) {
 
 - (NSString *)firstName
 {
-    return [self.modelDictionary objectForKey:kFirstNameKey];
+    return [self primitiveValueForKey:kFirstNameKey];
 }
 
 - (void)setFirstName:(NSString *)firstName
 {
-    [self.modelDictionary setObject:firstName forKey:kFirstNameKey];
+    [self setPrinmitiveValue:firstName forKey:kFirstNameKey];
 }
 
 - (NSString *)lastName
 {
-    return [self.modelDictionary objectForKey:kLastNameKey];
+    return [self primitiveValueForKey:kLastNameKey];
 }
 
 - (void)setLastName:(NSString *)lastName
 {
-    [self.modelDictionary setObject:lastName forKey:kLastNameKey];
+    [self setPrinmitiveValue:lastName forKey:kLastNameKey];
 }
 
 - (NSDate *)birthDate
 {
-    return [self.modelDictionary objectForKey:kBirthDateKey];
+    return [self primitiveValueForKey:kBirthDateKey];
 }
 
 - (void)setBirthDate:(NSDate *)birthDate
 {
-    [self.modelDictionary setObject:birthDate forKey:kBirthDateKey];
+    [self setPrinmitiveValue:birthDate forKey:kBirthDateKey];
 }
 
 - (NSString *)email
 {
-    return [self.modelDictionary objectForKey:kEmailKey];
+    return [self primitiveValueForKey:kEmailKey];
 }
 
 - (void)setEmail:(NSString *)email
 {
-    [self.modelDictionary setObject:email forKey:kEmailKey];
-
+    [self setPrinmitiveValue:email forKey:kEmailKey];
 }
 
 - (BOOL)isEqualToPerson:(TSTPerson *)object
 {
-    return [self.modelDictionary isEqualToDictionary:object.modelDictionary];
+    return [self.primitiveValues isEqualToDictionary:object.primitiveValues];
 }
 
 - (NSString *)fullName
@@ -142,14 +80,7 @@ typedef NS_ENUM(NSInteger, TSTPersonErrorCode) {
     return [NSString stringWithFormat:@"%@%@%@", self.firstName, self.firstName.length ? @" " : @"", self.lastName];
 }
 
-#pragma mark - NSCopying
 
-- (id)copyWithZone:(NSZone *)zone
-{
-    TSTPerson *copy = [[[self class] allocWithZone:zone] init];
-    [copy.modelDictionary setDictionary:[self.modelDictionary copy]];
-    return copy;
-}
 
 #pragma mark - Key-Value Observing
 
