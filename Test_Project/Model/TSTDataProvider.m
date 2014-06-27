@@ -11,7 +11,7 @@
 
 static void *TSTDataProviderObserveContext = &TSTDataProviderObserveContext;
 
-@interface TSTDataProvider ()
+@interface TSTDataProvider () <TSTListener>
 
 @property (nonatomic, strong) NSMutableArray *backingArray;
 
@@ -33,13 +33,18 @@ static void *TSTDataProviderObserveContext = &TSTDataProviderObserveContext;
     if (self)
     {
         _backingArray = [NSMutableArray arrayWithArray:anArray];
+        for (id object in _backingArray) {
+            [self addOrRemoveSubscriptionForObject:object withChangeType:TSTListenerChangeTypeInsert];
+        }
     }
 
     return self;
 }
 
-- (void)dealloc {
-    if (self.listeners.count) {
+- (void)dealloc
+{
+    if (self.listeners.count)
+    {
         [self removeObserver:self forKeyPath:@"objects" context:TSTDataProviderObserveContext];
     }
 }
@@ -94,8 +99,7 @@ static void *TSTDataProviderObserveContext = &TSTDataProviderObserveContext;
     [super addListener:listener];
     if ([self.listeners count] == 1)
     {
-        [self addObserver:self forKeyPath:@"objects" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionPrior
-        context:TSTDataProviderObserveContext];
+        [self addObserver:self forKeyPath:@"objects" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionPrior context:TSTDataProviderObserveContext];
     }
 }
 
@@ -167,19 +171,55 @@ static void *TSTDataProviderObserveContext = &TSTDataProviderObserveContext;
                     objects = change[NSKeyValueChangeNewKey];
                     break;
             }
-            
+
             NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
             NSEnumerator *objectEnumeration = [objects objectEnumerator];
-            
-            [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+
+            [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop)
+            {
                 id obj = [objectEnumeration nextObject];
-                [self notifydidChangeObject:obj atIndex:idx forChangeType:type userInfo:[change mutableCopy]];
+                [self notifyDidChangeObject:obj atIndex:idx forChangeType:type userInfo:[change mutableCopy]];
+                [self addOrRemoveSubscriptionForObject:obj withChangeType:type];
             }];
-            
+
             [self notifyDidChangeContent:[change mutableCopy]];
         }
     }
 }
 
+- (void)addOrRemoveSubscriptionForObject:(id)object withChangeType:(TSTListenerChangeType)type
+{
+    if ([object conformsToProtocol:@protocol(TSTObservable)])
+    {
+        id <TSTObservable> observable = object;
+        if (type == TSTListenerChangeTypeInsert)
+        {
+            [observable addListener:self];
+        }
+        else if (type == TSTListenerChangeTypeDelete)
+        {
+            [observable removeListener:self];
+        }
+    }
+}
+
+- (void)observableObjectWillChangeContent:(id <TSTObservable>)observable userInfo:(NSMutableDictionary *)userInfo
+{
+    if (!self.isNotifying)
+    {
+        [self notifyWillChangeContent:userInfo];
+    }
+}
+
+- (void)observableObjectDidChangeContent:(id <TSTObservable>)observable userInfo:(NSMutableDictionary *)userInfo
+{
+    NSUInteger index = [[self proxyObjects] indexOfObject:observable];
+    [self notifyDidChangeObject:self atIndex:index forChangeType:TSTListenerChangeTypeUpdate userInfo:userInfo];
+    
+    if (self.isNotifying)
+    {
+        [self notifyDidChangeContent:userInfo];
+    }
+}
 
 @end

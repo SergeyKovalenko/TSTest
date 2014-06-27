@@ -23,7 +23,8 @@
 
 - (void)notifyWillChangeContent:(NSMutableDictionary *)userInfo
 {
-    for (id<TSTListener> listener in self.listeners)
+    self.notifying = YES;
+    for (id <TSTListener> listener in self.listeners)
     {
         if ([listener respondsToSelector:@selector(observableObjectWillChangeContent:userInfo:)])
         {
@@ -32,9 +33,9 @@
     }
 }
 
-- (void)notifydidChangeObject:(id)anObject atIndex:(NSUInteger)index forChangeType:(TSTListenerChangeType)type userInfo:(NSMutableDictionary *)userInfo
+- (void)notifyDidChangeObject:(id)anObject atIndex:(NSUInteger)index forChangeType:(TSTListenerChangeType)type userInfo:(NSMutableDictionary *)userInfo
 {
-    for (id<TSTListener> listener in self.listeners)
+    for (id <TSTListener> listener in self.listeners)
     {
         if ([listener respondsToSelector:@selector(observableObject:didChangeObject:atIndex:forChangeType:userInfo:)])
         {
@@ -45,23 +46,26 @@
 
 - (void)notifyDidChangeContent:(NSMutableDictionary *)userInfo
 {
-    for (id<TSTListener> listener in self.listeners)
+    for (id <TSTListener> listener in self.listeners)
     {
-        if ([listener respondsToSelector:@selector(observableObjectWillChangeContent:userInfo:)])
+        if ([listener respondsToSelector:@selector(observableObjectDidChangeContent:userInfo:)])
         {
             [listener observableObjectDidChangeContent:self userInfo:userInfo];
         }
     }
+    self.notifying = NO;
 }
 
 - (void)addListener:(id <TSTListener>)listener
 {
     NSParameterAssert([listener conformsToProtocol:@protocol(TSTListener)]);
+    NSAssert(!self.isNotifying, @"Cannot support mutation during notification");
     [self.listeners addObject:listener];
 }
 
 - (void)removeListener:(id <TSTListener>)listener
 {
+    NSAssert(!self.isNotifying, @"Cannot support mutation during notification");
     [self.listeners removeObject:listener];
 }
 

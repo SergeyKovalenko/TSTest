@@ -11,9 +11,10 @@
 @interface TSTObservable (/*Protected*/)
 
 @property (nonatomic, strong) NSHashTable *listeners;
+@property (nonatomic, assign, getter = isNotifying) BOOL notifying;
 
 - (void)notifyWillChangeContent:(NSMutableDictionary *)userInfo;
-- (void)notifydidChangeObject:(id)anObject atIndex:(NSUInteger)index forChangeType:(TSTListenerChangeType)type userInfo:(NSMutableDictionary *)userInfo;
+- (void)notifyDidChangeObject:(id)anObject atIndex:(NSUInteger)index forChangeType:(TSTListenerChangeType)type userInfo:(NSMutableDictionary *)userInfo;
 - (void)notifyDidChangeContent:(NSMutableDictionary *)userInfo;
 
 @end

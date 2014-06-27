@@ -10,6 +10,7 @@
 #import "TSTDataProvider.h"
 #import "TSTPerson.h"
 #import "TSTAppDelegate.h"
+#import "TSTPersonDetailsTableViewController.h"
 
 @interface TSTPersonsTableViewController () <TSTListener>
 
@@ -139,15 +140,19 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)sender
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    TSTPersonDetailsTableViewController *details = segue.destinationViewController;
+    NSUInteger index = [self.tableView indexPathForCell:sender].row;
+    details.person = [self.dataProvider objectAtIndex:index];
+    
 }
-*/
+
 
 @end

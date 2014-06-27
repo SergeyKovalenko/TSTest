@@ -93,18 +93,20 @@ typedef NS_ENUM(NSInteger, TSTPersonErrorCode) {
 
 - (BOOL)validateEmail:(inout NSString **)ioValue error:(out NSError **)outError
 {
-    NSError *error;
-    if (outError != NULL) {
-        
-        NSString *errorString = NSLocalizedString(
-                                                  @"A Person's email must be at least three characters long", @"validation: Person, too short name error");
-        NSDictionary *userInfoDict = @{NSLocalizedDescriptionKey : errorString};
-        error = [[NSError alloc] initWithDomain:kTSTPersonErrorDomain code:TSTPersonErrorEmailCode userInfo:userInfoDict];
-    }
+    void(^setError)(void) = ^ {
+        if (outError != NULL) {
+            
+            NSString *errorString = NSLocalizedString(
+                                                      @"A Person's email must be at least three characters long", @"validation: Person, too short name error");
+            NSDictionary *userInfoDict = @{NSLocalizedDescriptionKey : errorString};
+            *outError = [[NSError alloc] initWithDomain:kTSTPersonErrorDomain code:TSTPersonErrorEmailCode userInfo:userInfoDict];
+        }
+    };
+    
     // The email must not be nil
     if ((*ioValue == nil) || [*ioValue length] < 3)
     {
-        *outError = error;
+        setError();
         return NO;
     }
     
@@ -115,7 +117,7 @@ typedef NS_ENUM(NSInteger, TSTPersonErrorCode) {
     // should only a single match
     if ([matches count] != 1)
     {
-        *outError = error;
+        setError();
         return NO;
     }
     
@@ -124,28 +126,28 @@ typedef NS_ENUM(NSInteger, TSTPersonErrorCode) {
     // result should be a link
     if (result.resultType != NSTextCheckingTypeLink)
     {
-        *outError = error;
+        setError();
         return NO;
     }
     
     // result should be a recognized mail address
     if (![result.URL.scheme isEqualToString:@"mailto"])
     {
-        *outError = error;
+        setError();
         return NO;
     }
     
     // match must be entire string
     if (!NSEqualRanges(result.range, entireRange))
     {
-        *outError = error;
+        setError();
         return NO;
     }
     
     // but should not have the mail URL scheme
     if ([*ioValue hasPrefix:@"mailto:"])
     {
-        *outError = error;
+        setError();
         return NO;
     }
     *ioValue = [[*ioValue lowercaseString] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
