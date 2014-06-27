@@ -7,9 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TSTModel.h"
 
-@interface TSTPerson : NSObject
+@interface TSTPerson : TSTModel
+
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, readonly) NSString *fullName;
+@property (nonatomic, strong) NSString *email;
 @property (nonatomic, strong) NSDate *birthDate;
+
+- (BOOL)isEqualToPerson:(TSTPerson *)other;
+- (BOOL)validateEmail:(inout NSString **)ioValue error:(out NSError **)outError;
 @end
