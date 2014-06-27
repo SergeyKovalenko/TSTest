@@ -9,9 +9,11 @@
 #import <XCTest/XCTest.h>
 #import "TSTPerson.h"
 
-@interface TSTPersonTest : XCTestCase
+@interface TSTPersonTest : XCTestCase <TSTListener>
 
 @property (nonatomic, strong) TSTPerson *person;
+@property (nonatomic, strong) NSMutableArray *personChangedKeys;
+
 @end
 
 @implementation TSTPersonTest
@@ -21,6 +23,7 @@
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
     self.person = [[TSTPerson alloc] init];
+    self.personChangedKeys = [NSMutableArray array];
 }
 
 - (void)tearDown
@@ -72,6 +75,29 @@
     TSTPerson *copy = [NSKeyedUnarchiver unarchiveObjectWithData:[NSKeyedArchiver archivedDataWithRootObject:self.person]];
     
     XCTAssertEqualObjects(self.person, copy);
+}
+
+- (void)testObservable
+{
+    [self.person addListener:self];
+    
+    self.person.firstName = @"firstName";
+    self.person.lastName = @"lastName";
+    NSArray *array =  [@[@"firstName",@"firstName", @"lastName",@"lastName"] mutableCopy];
+    XCTAssertEqualObjects(self.personChangedKeys, array);
+}
+
+- (void)observableObjectWillChangeContent:(id <TSTObservable>)observable userInfo:(NSMutableDictionary *)userInfo
+{
+    XCTAssertEqualObjects(self.person, observable);
+    [self.personChangedKeys addObject:userInfo[TSTModelChangedKey]];
+}
+
+
+- (void)observableObjectDidChangeContent:(id <TSTObservable>)observable userInfo:(NSMutableDictionary *)userInfo
+{
+    XCTAssertEqualObjects(self.person, observable);
+    [self.personChangedKeys addObject:userInfo[TSTModelChangedKey]];
 }
 
 @end

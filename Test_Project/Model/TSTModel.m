@@ -7,7 +7,10 @@
 //
 
 #import "TSTModel.h"
+#import "TSTObservable+Protected.h"
+
 static NSString *const kPrimitiveDictionaryKey = @"primitiveDictionary";
+NSString *const TSTModelChangedKey = @"TSTModelChangedKey";
 
 @interface TSTModel ()
 
@@ -15,6 +18,8 @@ static NSString *const kPrimitiveDictionaryKey = @"primitiveDictionary";
 @end
 
 @implementation TSTModel
+
+#pragma mark - TSTModel
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
@@ -96,6 +101,23 @@ static NSString *const kPrimitiveDictionaryKey = @"primitiveDictionary";
 - (id)copyWithZone:(NSZone *)zone
 {
     return [[[self class] allocWithZone:zone] initWithDictionary:self.primitiveDictionary];
+}
+
+#pragma mark - TSTObservable
+
+- (void)willChangeValueForKey:(NSString *)key
+{
+    [super willChangeValueForKey:key];
+    [self notifyWillChangeContent:[@{TSTModelChangedKey : key} mutableCopy]];
+}
+
+- (void)didChangeValueForKey:(NSString *)key
+{
+    [super didChangeValueForKey:key];
+    [self notifyDidChangeContent:[@{TSTModelChangedKey : key} mutableCopy]];
+
+
+
 }
 
 @end

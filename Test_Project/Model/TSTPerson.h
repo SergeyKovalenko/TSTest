@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TSTModel.h"
 
-@interface TSTPerson : TSTModel <NSCopying, NSCoding>
-
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+@interface TSTPerson : TSTModel
 
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;

@@ -49,7 +49,7 @@
     {
         if ([listener respondsToSelector:@selector(observableObjectWillChangeContent:userInfo:)])
         {
-            [listener observableObjectWillChangeContent:self userInfo:userInfo];
+            [listener observableObjectDidChangeContent:self userInfo:userInfo];
         }
     }
 }

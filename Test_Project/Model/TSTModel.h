@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TSTObservable.h"
 
-@interface TSTModel : NSObject
+extern NSString *const TSTModelChangedKey;
+
+@interface TSTModel : TSTObservable <NSCopying, NSCoding>
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 - (NSDictionary *)primitiveValues;
 - (id)primitiveValueForKey:(NSString *)key;
