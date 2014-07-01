@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TSTDataProvider.h"
 
 @interface TSTAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic, readonly) TSTDataProvider *dataProvider;
+
++ (TSTAppDelegate *)appDelegate;
 
 @end

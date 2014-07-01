@@ -7,8 +7,25 @@
 //
 
 #import "TSTAppDelegate.h"
+#import "TSTDataProvider+TSTFileUtils.h"
+
+@interface TSTAppDelegate()
+@property (strong, nonatomic, readwrite) TSTDataProvider *dataProvider;
+@end
+
 
 @implementation TSTAppDelegate
+
++ (TSTAppDelegate *)appDelegate {
+    return [[UIApplication sharedApplication] delegate];
+}
+
+- (TSTDataProvider *)dataProvider {
+    if (!_dataProvider) {
+        _dataProvider = [TSTDataProvider testDataProvider];
+    }
+    return _dataProvider;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

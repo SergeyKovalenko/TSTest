@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>FBB7C686-86EC-4968-B8FD-F5F5E7B5EF4D</string>
+	<string>89A1E8EA-4C5B-4F06-934B-766598D1EB5D</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Test_Project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>343777E9-1250-45B8-A947-05A9BA680074</key>
-		<string>ssh://github.com/YuryGrinenko/TSTest.git</string>
+		<key>A5B5B97F-C72A-4F3A-BAC8-0BA6584734FE</key>
+		<string>ssh://github.com/SergeyKovalenko/TSTest.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Test_Project.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>343777E9-1250-45B8-A947-05A9BA680074</key>
+		<key>A5B5B97F-C72A-4F3A-BAC8-0BA6584734FE</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/YuryGrinenko/TSTest.git</string>
+	<string>ssh://github.com/SergeyKovalenko/TSTest.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>343777E9-1250-45B8-A947-05A9BA680074</string>
+	<string>A5B5B97F-C72A-4F3A-BAC8-0BA6584734FE</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>343777E9-1250-45B8-A947-05A9BA680074</string>
+			<string>A5B5B97F-C72A-4F3A-BAC8-0BA6584734FE</string>
 			<key>IDESourceControlWCCName</key>
-			<string>TestProject</string>
+			<string>TSTest</string>
 		</dict>
 	</array>
 </dict>

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BD04A2E195EB9800087EDFE /* TSTModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD04A2D195EB9800087EDFE /* TSTModel.m */; };
+		2BD04A33195EC3ED0087EDFE /* TSTDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD04A30195EC3ED0087EDFE /* TSTDataProvider.m */; };
+		2BD04A34195EC3ED0087EDFE /* TSTDataProvider+TSTFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD04A32195EC3ED0087EDFE /* TSTDataProvider+TSTFileUtils.m */; };
+		2BD04A37195EC9E60087EDFE /* TSTPErsonListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD04A36195EC9E60087EDFE /* TSTPErsonListTableViewController.m */; };
+		2BD04A39195ECB8B0087EDFE /* contacts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BD04A38195ECB8B0087EDFE /* contacts.plist */; };
 		7099FDDE1955B2F00088F93A /* TSTPersonDescriptionFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7099FDDD1955B2F00088F93A /* TSTPersonDescriptionFormatter.m */; };
 		E1B881AA1950A46A00CE810D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B881A91950A46A00CE810D /* Foundation.framework */; };
 		E1B881AC1950A46A00CE810D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B881AB1950A46A00CE810D /* CoreGraphics.framework */; };
@@ -37,6 +42,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2BD04A2C195EB9800087EDFE /* TSTModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTModel.h; sourceTree = "<group>"; };
+		2BD04A2D195EB9800087EDFE /* TSTModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTModel.m; sourceTree = "<group>"; };
+		2BD04A2F195EC3ED0087EDFE /* TSTDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTDataProvider.h; sourceTree = "<group>"; };
+		2BD04A30195EC3ED0087EDFE /* TSTDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTDataProvider.m; sourceTree = "<group>"; };
+		2BD04A31195EC3ED0087EDFE /* TSTDataProvider+TSTFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TSTDataProvider+TSTFileUtils.h"; sourceTree = "<group>"; };
+		2BD04A32195EC3ED0087EDFE /* TSTDataProvider+TSTFileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TSTDataProvider+TSTFileUtils.m"; sourceTree = "<group>"; };
+		2BD04A35195EC9E60087EDFE /* TSTPErsonListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPErsonListTableViewController.h; sourceTree = "<group>"; };
+		2BD04A36195EC9E60087EDFE /* TSTPErsonListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPErsonListTableViewController.m; sourceTree = "<group>"; };
+		2BD04A38195ECB8B0087EDFE /* contacts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = contacts.plist; sourceTree = "<group>"; };
 		7099FDDC1955B2F00088F93A /* TSTPersonDescriptionFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPersonDescriptionFormatter.h; sourceTree = "<group>"; };
 		7099FDDD1955B2F00088F93A /* TSTPersonDescriptionFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonDescriptionFormatter.m; sourceTree = "<group>"; };
 		E1B881A61950A46A00CE810D /* Test_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,11 +140,14 @@
 				E1B881BB1950A46A00CE810D /* Main_iPhone.storyboard */,
 				E1B881BE1950A46A00CE810D /* Main_iPad.storyboard */,
 				E1B881C11950A46A00CE810D /* TSTViewController.h */,
+				2BD04A35195EC9E60087EDFE /* TSTPErsonListTableViewController.h */,
+				2BD04A36195EC9E60087EDFE /* TSTPErsonListTableViewController.m */,
 				E1B881C21950A46A00CE810D /* TSTViewController.m */,
 				E1B881C41950A46A00CE810D /* Images.xcassets */,
 				E1B881B01950A46A00CE810D /* Supporting Files */,
 				7099FDDC1955B2F00088F93A /* TSTPersonDescriptionFormatter.h */,
 				7099FDDD1955B2F00088F93A /* TSTPersonDescriptionFormatter.m */,
+				2BD04A38195ECB8B0087EDFE /* contacts.plist */,
 			);
 			path = Test_Project;
 			sourceTree = "<group>";
@@ -167,8 +184,14 @@
 		E1B881E81950A69100CE810D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2BD04A2C195EB9800087EDFE /* TSTModel.h */,
+				2BD04A2D195EB9800087EDFE /* TSTModel.m */,
 				E1B881E91950A69100CE810D /* TSTPerson.h */,
 				E1B881EA1950A69100CE810D /* TSTPerson.m */,
+				2BD04A2F195EC3ED0087EDFE /* TSTDataProvider.h */,
+				2BD04A30195EC3ED0087EDFE /* TSTDataProvider.m */,
+				2BD04A31195EC3ED0087EDFE /* TSTDataProvider+TSTFileUtils.h */,
+				2BD04A32195EC3ED0087EDFE /* TSTDataProvider+TSTFileUtils.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -254,6 +277,7 @@
 				E1B881C51950A46A00CE810D /* Images.xcassets in Resources */,
 				E1B881BD1950A46A00CE810D /* Main_iPhone.storyboard in Resources */,
 				E1B881B41950A46A00CE810D /* InfoPlist.strings in Resources */,
+				2BD04A39195ECB8B0087EDFE /* contacts.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,11 +296,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BD04A34195EC3ED0087EDFE /* TSTDataProvider+TSTFileUtils.m in Sources */,
 				7099FDDE1955B2F00088F93A /* TSTPersonDescriptionFormatter.m in Sources */,
 				E1B881EB1950A69100CE810D /* TSTPerson.m in Sources */,
 				E1B881BA1950A46A00CE810D /* TSTAppDelegate.m in Sources */,
+				2BD04A37195EC9E60087EDFE /* TSTPErsonListTableViewController.m in Sources */,
 				E1B881C31950A46A00CE810D /* TSTViewController.m in Sources */,
+				2BD04A33195EC3ED0087EDFE /* TSTDataProvider.m in Sources */,
 				E1B881B61950A46A00CE810D /* main.m in Sources */,
+				2BD04A2E195EB9800087EDFE /* TSTModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
