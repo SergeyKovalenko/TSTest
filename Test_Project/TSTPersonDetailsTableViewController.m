@@ -10,12 +10,13 @@
 #import "TSTPerson.h"
 static void * TSTPersonDetailsObserveContext = &TSTPersonDetailsObserveContext;
 
-@interface TSTPersonDetailsTableViewController () <TSTListener, UITextFieldDelegate>
+@interface TSTPersonDetailsTableViewController () <TSTListener, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UIDatePicker *birthDatePicker;
+@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
 
 @property (nonatomic, assign, getter = isPersonChanging) BOOL personChanging;
 @end
@@ -83,6 +84,7 @@ static void * TSTPersonDetailsObserveContext = &TSTPersonDetailsObserveContext;
         {
             [self.birthDatePicker setDate:self.person.birthDate animated:YES];
         }
+        self.photoImageView.image = self.person.photo;
         [self updateTextFields];
     }
 }
@@ -159,4 +161,19 @@ static void * TSTPersonDetailsObserveContext = &TSTPersonDetailsObserveContext;
     self.person.birthDate = self.birthDatePicker.date;
 }
 
+- (IBAction)choosePhoto:(id)sender
+{
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    self.person.photo = info[UIImagePickerControllerOriginalImage];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
 @end
