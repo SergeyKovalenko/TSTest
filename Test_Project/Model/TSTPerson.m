@@ -12,6 +12,7 @@ static NSString *const kFirstNameKey = @"firstName";
 static NSString *const kLastNameKey = @"lastName";
 static NSString *const kBirthDateKey = @"birthDate";
 static NSString *const kEmailKey = @"email";
+static NSString *const kPhotoKey = @"photo";
 
 static NSString *const kTSTPersonErrorDomain = @"TSTPersonErrorDomain";
 
@@ -80,6 +81,13 @@ typedef NS_ENUM(NSInteger, TSTPersonErrorCode) {
     return [NSString stringWithFormat:@"%@%@%@", self.firstName, self.firstName.length ? @" " : @"", self.lastName];
 }
 
+- (void)setPhoto:(UIImage *)photo {
+    [self setPrinmitiveValue:photo forKey:kPhotoKey];
+}
+
+- (UIImage *)photo {
+    return [self primitiveValueForKey:kPhotoKey];
+}
 
 
 #pragma mark - Key-Value Observing

@@ -16,6 +16,8 @@
 @property (nonatomic, readonly) NSString *fullName;
 @property (nonatomic, strong) NSString *email;
 @property (nonatomic, strong) NSDate *birthDate;
+@property (nonatomic, strong) UIImage *photo;
+
 
 - (BOOL)isEqualToPerson:(TSTPerson *)other;
 - (BOOL)validateEmail:(inout NSString **)ioValue error:(out NSError **)outError;

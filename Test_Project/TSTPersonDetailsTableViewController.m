@@ -10,12 +10,13 @@
 #import "TSTPerson.h"
 static void * TSTPersonDetailsObserveContext = &TSTPersonDetailsObserveContext;
 
-@interface TSTPersonDetailsTableViewController () <TSTListener, UITextFieldDelegate>
+@interface TSTPersonDetailsTableViewController () <TSTListener, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UIDatePicker *birthDatePicker;
+@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
 
 @property (nonatomic, assign, getter = isPersonChanging) BOOL personChanging;
 @end
@@ -79,12 +80,16 @@ static void * TSTPersonDetailsObserveContext = &TSTPersonDetailsObserveContext;
 {
     if (self.isViewLoaded)
     {
-        if (self.person.birthDate) {
+        if (self.person.birthDate)
+        {
             [self.birthDatePicker setDate:self.person.birthDate animated:YES];
         }
+        self.photoImageView.image = self.person.photo;
         [self updateTextFields];
     }
 }
+
+#pragma mark - TSTListener
 
 - (void)observableObjectDidChangeContent:(id <TSTObservable>)observable userInfo:(NSMutableDictionary *)userInfo
 {
@@ -94,33 +99,14 @@ static void * TSTPersonDetailsObserveContext = &TSTPersonDetailsObserveContext;
     [self setupPersonBindings];
 }
 
+#pragma mark - KVO
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if (object == self.person && TSTPersonDetailsObserveContext == context) {
+    if (object == self.person && TSTPersonDetailsObserveContext == context)
+    {
         self.title = change[NSKeyValueChangeNewKey];
     }
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    for (NSString *key in self.contactStringKeys)
-    {
-        UITextField *field = [self textFieldForModelKey:key];
-        if (field == textField)
-        {
-            NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
-            if ([self.person validateValue:&value forKey:key error:nil]) {
-                [self willChangePerson];
-                [self.person setValue:value forKey:key];
-                [self didChangePerson];
-                textField.textColor = nil;
-            } else {
-                textField.textColor = [UIColor redColor];
-            }
-            break;
-        }
-    }
-    return YES;
 }
 
 - (void)didChangePerson
@@ -133,14 +119,61 @@ static void * TSTPersonDetailsObserveContext = &TSTPersonDetailsObserveContext;
     self.personChanging = YES;
 }
 
+#pragma mark - UITextFieldDelegate
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     return [textField resignFirstResponder];
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    for (NSString *key in self.contactStringKeys)
+    {
+        UITextField *field = [self textFieldForModelKey:key];
+        if (field == textField)
+        {
+            NSString *value = [textField.text stringByReplacingCharactersInRange:range withString:string];
+            
+            if ([self.person validateValue:&value forKey:key error:nil])
+            {
+                [self willChangePerson];
+                [self.person setValue:value forKey:key];
+                [self didChangePerson];
+                textField.textColor = nil;
+                
+            } else
+            {
+                textField.textColor = [UIColor redColor];
+            }
+            
+            break;
+        }
+    }
+    
+    return YES;
+}
+
+#pragma mark - IBActions
 
 - (IBAction)pickerDidChangeDate:(id)sender
 {
     self.person.birthDate = self.birthDatePicker.date;
 }
 
+- (IBAction)choosePhoto:(id)sender
+{
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    self.person.photo = info[UIImagePickerControllerOriginalImage];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
 @end

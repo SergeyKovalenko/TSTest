@@ -42,6 +42,15 @@
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = [self createAddButton];
+    
+    [self.tableView addObserver:self forKeyPath:@"contentInset" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    NSLog(@"change %@",change);
+    NSLog(@"%@", [NSThread callStackSymbols]);
 }
 
 - (UIBarButtonItem *)createAddButton
