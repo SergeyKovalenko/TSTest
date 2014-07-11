@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B1AB580196D8ECA006DC9FD /* TSTTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1AB57F196D8ECA006DC9FD /* TSTTestViewController.m */; };
+		2B1AB580196D8ECA006DC9FD /* TSTPersonsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1AB57F196D8ECA006DC9FD /* TSTPersonsCollectionViewController.m */; };
 		2B925237195C73250089B82C /* TSTDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B925236195C73250089B82C /* TSTDataProvider.m */; };
 		2B92523B195CD21E0089B82C /* TSTPersonTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B92523A195CD21E0089B82C /* TSTPersonTest.m */; };
 		2B92523D195CDC1C0089B82C /* contacts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B92523C195CDC1C0089B82C /* contacts.plist */; };
@@ -15,7 +15,7 @@
 		2B925243195CE5820089B82C /* TSTPersonsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B925242195CE5820089B82C /* TSTPersonsTableViewController.m */; };
 		2BD04A15195D585B0087EDFE /* TSTModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD04A14195D585B0087EDFE /* TSTModel.m */; };
 		2BD04A2B195D7F510087EDFE /* TSTPersonDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD04A2A195D7F510087EDFE /* TSTPersonDetailsTableViewController.m */; };
-		2BFCAE5A196D7CC800D650C9 /* TSTTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BFCAE59196D7CC800D650C9 /* TSTTransitionViewController.m */; };
+		2BFCAE5A196D7CC800D650C9 /* TSTPersonsContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BFCAE59196D7CC800D650C9 /* TSTPersonsContainerViewController.m */; };
 		7099FDDE1955B2F00088F93A /* TSTPersonDescriptionFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7099FDDD1955B2F00088F93A /* TSTPersonDescriptionFormatter.m */; };
 		E1B881AA1950A46A00CE810D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B881A91950A46A00CE810D /* Foundation.framework */; };
 		E1B881AC1950A46A00CE810D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B881AB1950A46A00CE810D /* CoreGraphics.framework */; };
@@ -46,8 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2B1AB57E196D8ECA006DC9FD /* TSTTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTTestViewController.h; sourceTree = "<group>"; };
-		2B1AB57F196D8ECA006DC9FD /* TSTTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTTestViewController.m; sourceTree = "<group>"; };
+		2B1AB57E196D8ECA006DC9FD /* TSTPersonsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPersonsCollectionViewController.h; sourceTree = "<group>"; };
+		2B1AB57F196D8ECA006DC9FD /* TSTPersonsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonsCollectionViewController.m; sourceTree = "<group>"; };
 		2B925235195C73250089B82C /* TSTDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTDataProvider.h; sourceTree = "<group>"; };
 		2B925236195C73250089B82C /* TSTDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTDataProvider.m; sourceTree = "<group>"; };
 		2B92523A195CD21E0089B82C /* TSTPersonTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSTPersonTest.m; path = Test_ProjectTests/TSTPersonTest.m; sourceTree = SOURCE_ROOT; };
@@ -61,8 +61,8 @@
 		2BD04A26195D673D0087EDFE /* TSTObservable+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TSTObservable+Protected.h"; sourceTree = "<group>"; };
 		2BD04A29195D7F510087EDFE /* TSTPersonDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPersonDetailsTableViewController.h; sourceTree = "<group>"; };
 		2BD04A2A195D7F510087EDFE /* TSTPersonDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonDetailsTableViewController.m; sourceTree = "<group>"; };
-		2BFCAE58196D7CC800D650C9 /* TSTTransitionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTTransitionViewController.h; sourceTree = "<group>"; };
-		2BFCAE59196D7CC800D650C9 /* TSTTransitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTTransitionViewController.m; sourceTree = "<group>"; };
+		2BFCAE58196D7CC800D650C9 /* TSTPersonsContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPersonsContainerViewController.h; sourceTree = "<group>"; };
+		2BFCAE59196D7CC800D650C9 /* TSTPersonsContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonsContainerViewController.m; sourceTree = "<group>"; };
 		7099FDDC1955B2F00088F93A /* TSTPersonDescriptionFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPersonDescriptionFormatter.h; sourceTree = "<group>"; };
 		7099FDDD1955B2F00088F93A /* TSTPersonDescriptionFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonDescriptionFormatter.m; sourceTree = "<group>"; };
 		E1B881A61950A46A00CE810D /* Test_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,14 +172,14 @@
 				E1B881B91950A46A00CE810D /* TSTAppDelegate.m */,
 				E1B881BB1950A46A00CE810D /* Main_iPhone.storyboard */,
 				E1B881BE1950A46A00CE810D /* Main_iPad.storyboard */,
-				2B925241195CE5820089B82C /* TSTPersonsTableViewController.h */,
-				2B925242195CE5820089B82C /* TSTPersonsTableViewController.m */,
 				2BD04A29195D7F510087EDFE /* TSTPersonDetailsTableViewController.h */,
 				2BD04A2A195D7F510087EDFE /* TSTPersonDetailsTableViewController.m */,
-				2BFCAE58196D7CC800D650C9 /* TSTTransitionViewController.h */,
-				2BFCAE59196D7CC800D650C9 /* TSTTransitionViewController.m */,
-				2B1AB57E196D8ECA006DC9FD /* TSTTestViewController.h */,
-				2B1AB57F196D8ECA006DC9FD /* TSTTestViewController.m */,
+				2BFCAE58196D7CC800D650C9 /* TSTPersonsContainerViewController.h */,
+				2BFCAE59196D7CC800D650C9 /* TSTPersonsContainerViewController.m */,
+				2B925241195CE5820089B82C /* TSTPersonsTableViewController.h */,
+				2B925242195CE5820089B82C /* TSTPersonsTableViewController.m */,
+				2B1AB57E196D8ECA006DC9FD /* TSTPersonsCollectionViewController.h */,
+				2B1AB57F196D8ECA006DC9FD /* TSTPersonsCollectionViewController.m */,
 				E1B881C41950A46A00CE810D /* Images.xcassets */,
 				E1B881B01950A46A00CE810D /* Supporting Files */,
 				7099FDDC1955B2F00088F93A /* TSTPersonDescriptionFormatter.h */,
@@ -340,10 +340,10 @@
 				2B925240195CE3AB0089B82C /* TSTDataProvider+TSTFileUtils.m in Sources */,
 				E1B881BA1950A46A00CE810D /* TSTAppDelegate.m in Sources */,
 				2B925243195CE5820089B82C /* TSTPersonsTableViewController.m in Sources */,
-				2B1AB580196D8ECA006DC9FD /* TSTTestViewController.m in Sources */,
+				2B1AB580196D8ECA006DC9FD /* TSTPersonsCollectionViewController.m in Sources */,
 				E1B881B61950A46A00CE810D /* main.m in Sources */,
 				ED86FC3F68B90661E7B04F2E /* TSTObservable.m in Sources */,
-				2BFCAE5A196D7CC800D650C9 /* TSTTransitionViewController.m in Sources */,
+				2BFCAE5A196D7CC800D650C9 /* TSTPersonsContainerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

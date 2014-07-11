@@ -6,12 +6,13 @@
 //  Copyright (c) 2014 Anton Kuznetsov. All rights reserved.
 //
 
-#import "TSTTransitionViewController.h"
+#import "TSTPersonsContainerViewController.h"
+
 static const NSTimeInterval TSTAnimationDuration = 0.3;
 
-@interface TSTTransitionViewController ()
+@interface TSTPersonsContainerViewController ()
+
 @property (nonatomic, strong) NSMutableDictionary *viewControllers;
-@property (nonatomic, readwrite) UIView *containerView;
 @property (nonatomic, readwrite) UIViewController *contentController;
 
 @end
@@ -24,23 +25,14 @@ static const NSTimeInterval TSTAnimationDuration = 0.3;
 
 - (void)perform {
     UIViewController *destinationViewController = self.destinationViewController;
-    TSTTransitionViewController *sourceViewController = self.sourceViewController;
+    TSTPersonsContainerViewController *sourceViewController = self.sourceViewController;
     [sourceViewController registerViewController:destinationViewController
                          forInterfaceOrientationMask:destinationViewController.supportedInterfaceOrientations];
 }
 
 @end
 
-@implementation TSTTransitionViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@implementation TSTPersonsContainerViewController
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -50,33 +42,59 @@ static const NSTimeInterval TSTAnimationDuration = 0.3;
     return self;
 }
 
-- (void)loadView {
-//    self.extendedLayoutIncludesOpaqueBars = YES;
-    UIView *view = [[UIView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
-    view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.view = view;
-    
-    _containerView = [[UIView alloc] initWithFrame:view.bounds];
-    _containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:_containerView];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
+    
     [self performSegueWithIdentifier:@"TSTTransitionSegue" sender:nil];
     [self performSegueWithIdentifier:@"TSTTransitionSegue2" sender:nil];
-
+    
+    self.navigationItem.rightBarButtonItem = [self addPersonButton];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
     [self updateContentForInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] animated:animated];
 }
 
+- (UIBarButtonItem *)addPersonButton {
+    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addPerson:)];
+}
 
-- (void)transitionToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController  withOptions:(UIViewAnimationOptions)options animated:(BOOL)animated
-{
+#pragma mark - Actions
+- (void)addPerson:(id)sender {
+    if ([self.contentController respondsToSelector:@selector(addPerson:)]) {
+        [self.contentController performSelector:@selector(addPerson:) withObject:sender];
+    }
+}
+
+#pragma mark - Interface orientation methods
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    NSUInteger supportedInterfaceOrientationsMask = 0;
+    for (NSNumber *orientation in [self.viewControllers allKeys]) {
+        supportedInterfaceOrientationsMask |= 1 << orientation.unsignedIntegerValue;
+    }
+    return supportedInterfaceOrientationsMask;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration; {
+    
+    [self updateContentForInterfaceOrientation:toInterfaceOrientation animated:YES];
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+
+}
+
+#pragma mark - Transitions methods
+- (void)transitionToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController  withOptions:(UIViewAnimationOptions)options animated:(BOOL)animated {
+    
     UIViewAnimationOptions animationOptions = options |
     UIViewAnimationOptionLayoutSubviews |
     UIViewAnimationOptionAllowAnimatedContent |
@@ -85,10 +103,10 @@ static const NSTimeInterval TSTAnimationDuration = 0.3;
     [fromViewController willMoveToParentViewController:nil];
     [self addChildViewController:toViewController];
     
-    toViewController.view.frame = self.containerView.bounds;
+    toViewController.view.frame = self.view.bounds;
     toViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-
-    fromViewController.view.frame = self.containerView.bounds;
+    
+    fromViewController.view.frame = self.view.bounds;
     fromViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     void(^completion)(BOOL finished) = ^(BOOL finished) {
@@ -96,10 +114,9 @@ static const NSTimeInterval TSTAnimationDuration = 0.3;
         [toViewController didMoveToParentViewController:self];
     };
     
-    if (animated)
-    {
-        if (fromViewController)
-        {
+    if (animated) {
+        if (fromViewController) {
+
             [UIView transitionFromView:fromViewController.view
                                 toView:toViewController.view
                               duration:TSTAnimationDuration
@@ -107,49 +124,25 @@ static const NSTimeInterval TSTAnimationDuration = 0.3;
                             completion:completion];
             
         }
-        else
-        {
+        else {
             
-            [UIView transitionWithView:self.containerView
+            [UIView transitionWithView:self.view
                               duration:TSTAnimationDuration
                                options:animationOptions
                             animations:^{
-                                [self.containerView addSubview:toViewController.view];
+                                [self.view addSubview:toViewController.view];
                             } completion:completion];
         }
     }
-    else
-    {
+    else {
         [fromViewController.view removeFromSuperview];
-        [self.containerView addSubview:toViewController.view];
+        [self.view addSubview:toViewController.view];
         completion(YES);
     }
+}
+
+- (void)updateContentForInterfaceOrientation:(UIInterfaceOrientation)orientation animated:(BOOL)animated {
     
-}
-
-- (BOOL)shouldAutorotate
-{
-    return YES;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    NSUInteger supportedInterfaceOrientationsMask = 0;
-    for (NSNumber *orientation in [self.viewControllers allKeys]) {
-        supportedInterfaceOrientationsMask |= 1 << orientation.unsignedIntegerValue;
-    }
-    return supportedInterfaceOrientationsMask;
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration;
-{
-    [self updateContentForInterfaceOrientation:toInterfaceOrientation animated:YES];
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-
-}
-
-- (void)updateContentForInterfaceOrientation:(UIInterfaceOrientation)orientation animated:(BOOL)animated
-{
     UIViewController *controller = [self registeredViewControllerForInterfaceOrientation:orientation];
     if (controller && self.contentController != controller) {
         [self transitionToViewController:controller fromViewController:self.contentController withOptions:UIViewAnimationOptionTransitionCrossDissolve animated:YES];
@@ -157,8 +150,8 @@ static const NSTimeInterval TSTAnimationDuration = 0.3;
     }
 }
 
-- (void)registerViewController:(UIViewController *)viewController forInterfaceOrientationMask:(NSUInteger)orientationMask
-{
+- (void)registerViewController:(UIViewController *)viewController forInterfaceOrientationMask:(NSUInteger)orientationMask {
+    
     if ((orientationMask & UIInterfaceOrientationMaskPortrait) == UIInterfaceOrientationMaskPortrait) {
         self.viewControllers[@(UIInterfaceOrientationPortrait)] = viewController;
     }
@@ -176,8 +169,8 @@ static const NSTimeInterval TSTAnimationDuration = 0.3;
     }
 }
 
-- (UIViewController *)registeredViewControllerForInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
+- (UIViewController *)registeredViewControllerForInterfaceOrientation:(UIInterfaceOrientation)orientation {
+    
     return self.viewControllers[@(orientation)];
 }
 

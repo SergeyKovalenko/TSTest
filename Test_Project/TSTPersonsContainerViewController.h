@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TSTTransitionViewController : UIViewController
+@interface TSTPersonsContainerViewController : UIViewController
 
 - (void)registerViewController:(UIViewController *)viewController forInterfaceOrientationMask:(NSUInteger)orientationMask;
 - (UIViewController *)registeredViewControllerForInterfaceOrientation:(UIInterfaceOrientation)orientation;

@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Transition View Controller-->
+        <!--Persons Container View Controller-->
         <scene sceneID="wEz-FT-DYz">
             <objects>
-                <viewController id="yun-Eq-0Yh" customClass="TSTTransitionViewController" sceneMemberID="viewController">
+                <viewController id="yun-Eq-0Yh" customClass="TSTPersonsContainerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="COt-oV-vdC"/>
                         <viewControllerLayoutGuide type="bottom" id="VS4-YN-Ea8"/>
@@ -20,12 +20,46 @@
                     <navigationItem key="navigationItem" id="rPZ-KD-lGD"/>
                     <connections>
                         <segue destination="m3l-lz-MQz" kind="custom" identifier="TSTTransitionSegue" customClass="TSTTransitionSegue" id="ihW-Jh-Kbe"/>
-                        <segue destination="pi6-4C-sWZ" kind="custom" identifier="TSTTransitionSegue2" customClass="TSTTransitionSegue" id="UlP-Eo-bG6"/>
+                        <segue destination="4Ea-xe-B2q" kind="custom" identifier="TSTTransitionSegue2" customClass="TSTTransitionSegue" id="dbj-k4-hEq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fac-A6-2oJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="17" y="-149"/>
+        </scene>
+        <!--Persons Collection View Controller-->
+        <scene sceneID="r3a-jR-deX">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="4Ea-xe-B2q" customClass="TSTPersonsCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="bU4-nE-f6H">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zn6-vy-Yri">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="iW3-bp-Yk5">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="4Ea-xe-B2q" id="r4D-eo-0We"/>
+                            <outlet property="delegate" destination="4Ea-xe-B2q" id="kPc-Jz-fuf"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jww-y0-Kpz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="572" y="206"/>
         </scene>
         <!--Persons Table View Controller - Contacts list-->
         <scene sceneID="97u-pp-QHF">
@@ -74,24 +108,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4JN-sd-Hph" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="572" y="-487"/>
-        </scene>
-        <!--Test View Controller-->
-        <scene sceneID="mcl-X8-RaO">
-            <objects>
-                <viewController id="pi6-4C-sWZ" customClass="TSTTestViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="N2o-39-akT"/>
-                        <viewControllerLayoutGuide type="bottom" id="rpb-AQ-uQY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="H4Z-gF-U3M">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Wzb-6Y-Prg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="572" y="170"/>
         </scene>
         <!--Person Details Table View Controller-->
         <scene sceneID="Y6A-6b-0Vr">

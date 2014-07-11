@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TSTTestViewController : UIViewController
+@interface TSTPersonsCollectionViewController : UICollectionViewController
 
 @end
