@@ -16,6 +16,8 @@
 		2BD04A15195D585B0087EDFE /* TSTModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD04A14195D585B0087EDFE /* TSTModel.m */; };
 		2BD04A2B195D7F510087EDFE /* TSTPersonDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD04A2A195D7F510087EDFE /* TSTPersonDetailsTableViewController.m */; };
 		2BFCAE5A196D7CC800D650C9 /* TSTPersonsContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BFCAE59196D7CC800D650C9 /* TSTPersonsContainerViewController.m */; };
+		702E9B411971452B00DF7CFF /* TSTPersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 702E9B401971452B00DF7CFF /* TSTPersonTableViewCell.m */; };
+		702E9B441971601500DF7CFF /* TSTPersonCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 702E9B431971601500DF7CFF /* TSTPersonCollectionViewCell.m */; };
 		7099FDDE1955B2F00088F93A /* TSTPersonDescriptionFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7099FDDD1955B2F00088F93A /* TSTPersonDescriptionFormatter.m */; };
 		E1B881AA1950A46A00CE810D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B881A91950A46A00CE810D /* Foundation.framework */; };
 		E1B881AC1950A46A00CE810D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B881AB1950A46A00CE810D /* CoreGraphics.framework */; };
@@ -63,6 +65,10 @@
 		2BD04A2A195D7F510087EDFE /* TSTPersonDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonDetailsTableViewController.m; sourceTree = "<group>"; };
 		2BFCAE58196D7CC800D650C9 /* TSTPersonsContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPersonsContainerViewController.h; sourceTree = "<group>"; };
 		2BFCAE59196D7CC800D650C9 /* TSTPersonsContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonsContainerViewController.m; sourceTree = "<group>"; };
+		702E9B3F1971452B00DF7CFF /* TSTPersonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPersonTableViewCell.h; sourceTree = "<group>"; };
+		702E9B401971452B00DF7CFF /* TSTPersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonTableViewCell.m; sourceTree = "<group>"; };
+		702E9B421971601500DF7CFF /* TSTPersonCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPersonCollectionViewCell.h; sourceTree = "<group>"; };
+		702E9B431971601500DF7CFF /* TSTPersonCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonCollectionViewCell.m; sourceTree = "<group>"; };
 		7099FDDC1955B2F00088F93A /* TSTPersonDescriptionFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPersonDescriptionFormatter.h; sourceTree = "<group>"; };
 		7099FDDD1955B2F00088F93A /* TSTPersonDescriptionFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonDescriptionFormatter.m; sourceTree = "<group>"; };
 		E1B881A61950A46A00CE810D /* Test_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +140,17 @@
 			name = Listener;
 			sourceTree = "<group>";
 		};
+		702E9B3E197144D700DF7CFF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				702E9B3F1971452B00DF7CFF /* TSTPersonTableViewCell.h */,
+				702E9B401971452B00DF7CFF /* TSTPersonTableViewCell.m */,
+				702E9B421971601500DF7CFF /* TSTPersonCollectionViewCell.h */,
+				702E9B431971601500DF7CFF /* TSTPersonCollectionViewCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		E1B8819D1950A46A00CE810D = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +184,7 @@
 		E1B881AF1950A46A00CE810D /* Test_Project */ = {
 			isa = PBXGroup;
 			children = (
+				702E9B3E197144D700DF7CFF /* Cells */,
 				E1B881E81950A69100CE810D /* Model */,
 				E1B881B81950A46A00CE810D /* TSTAppDelegate.h */,
 				E1B881B91950A46A00CE810D /* TSTAppDelegate.m */,
@@ -334,8 +352,10 @@
 			files = (
 				7099FDDE1955B2F00088F93A /* TSTPersonDescriptionFormatter.m in Sources */,
 				E1B881EB1950A69100CE810D /* TSTPerson.m in Sources */,
+				702E9B411971452B00DF7CFF /* TSTPersonTableViewCell.m in Sources */,
 				2BD04A15195D585B0087EDFE /* TSTModel.m in Sources */,
 				2BD04A2B195D7F510087EDFE /* TSTPersonDetailsTableViewController.m in Sources */,
+				702E9B441971601500DF7CFF /* TSTPersonCollectionViewCell.m in Sources */,
 				2B925237195C73250089B82C /* TSTDataProvider.m in Sources */,
 				2B925240195CE3AB0089B82C /* TSTDataProvider+TSTFileUtils.m in Sources */,
 				E1B881BA1950A46A00CE810D /* TSTAppDelegate.m in Sources */,

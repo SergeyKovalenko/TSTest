@@ -11,6 +11,7 @@
 #import "TSTPerson.h"
 #import "TSTAppDelegate.h"
 #import "TSTPersonDetailsTableViewController.h"
+#import "TSTPersonTableViewCell.h"
 
 @interface TSTPersonsTableViewController () <TSTListener>
 
@@ -25,6 +26,12 @@
 
     self.dataProvider = [TSTAppDelegate sharedDelegate].dataProvider;
     [self.dataProvider addListener:self];
+    
+    self.navigationItem.rightBarButtonItem = [self addPersonButton];
+}
+
+- (UIBarButtonItem *)addPersonButton {
+    return [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addPerson:)];
 }
 
 - (void)addPerson:(id)sender {
@@ -41,13 +48,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     TSTPerson *person = [self.dataProvider objectAtIndex:(NSUInteger) indexPath.row];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContactCell" forIndexPath:indexPath];
-    cell.textLabel.text = person.fullName;
-    cell.detailTextLabel.text = [NSDateFormatter localizedStringFromDate:person.birthDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle];
-
-    // Configure the cell...
+    TSTPersonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContactCell" forIndexPath:indexPath];
+    [cell setupWithPerson:person];
 
     return cell;
 }
