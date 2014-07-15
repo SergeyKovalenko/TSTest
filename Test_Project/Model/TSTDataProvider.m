@@ -21,6 +21,10 @@ static void *TSTDataProviderObserveContext = &TSTDataProviderObserveContext;
 
 #pragma mark - TSTDataProvider Methods
 
+- (id)init {
+    return [self initWithArray:nil];
+}
+
 - (instancetype)initWithContentOfFile:(NSString *)filePath
 {
     NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
@@ -75,6 +79,11 @@ static void *TSTDataProviderObserveContext = &TSTDataProviderObserveContext;
 - (void)addObject:(id)anObject
 {
     [self.proxyObjects addObject:anObject];
+}
+
+- (void)addObjectsFromArray:(NSArray *)objects
+{
+    [self.proxyObjects addObjectsFromArray:objects];
 }
 
 - (void)removeObject:(id)anObject

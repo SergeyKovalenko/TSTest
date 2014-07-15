@@ -16,6 +16,8 @@
 - (NSUInteger)indexOfObject:(id)anObject;
 
 - (void)addObject:(id)anObject;
+- (void)addObjectsFromArray:(NSArray *)objects;
+
 - (void)removeObject:(id)anObject;
 
 - (void)insertObject:(id)anObject atIndex:(NSUInteger)index;
