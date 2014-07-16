@@ -12,21 +12,35 @@
 #import "TSTAppDelegate.h"
 #import "TSTPersonDetailsTableViewController.h"
 #import "TSTPersonTableViewCell.h"
+#import "TSTListsViewMediator.h"
 
-@interface TSTPersonsTableViewController () <TSTListener>
+@interface TSTPersonsTableViewController ()
 
 @property (nonatomic, strong) id <TSTDataProvider, TSTObservable> dataProvider;
+@property (nonatomic, strong) TSTListsViewMediator *tableViewMediator;
 
 @end
 
 @implementation TSTPersonsTableViewController
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        _dataProvider = [TSTAppDelegate sharedDelegate].dataProvider;
+        _tableViewMediator = [[TSTListsViewMediator alloc] init];
+    }
+    return self;
+}
+
+- (void)dealloc {
+    [_dataProvider removeListener:_tableViewMediator];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.dataProvider = [TSTAppDelegate sharedDelegate].dataProvider;
-    [self.dataProvider addListener:self];
-    
+    self.tableViewMediator.tableView = self.tableView;
+    [self.dataProvider addListener:self.tableViewMediator];
     self.navigationItem.rightBarButtonItem = [self addPersonButton];
 }
 
@@ -57,35 +71,8 @@
     return cell;
 }
 
-#pragma mark - TSTListener protocol methods
-
-- (void)observableObjectWillChangeContent:(id <TSTObservable>)observable userInfo:(NSMutableDictionary *)userInfo {
-    [self.tableView beginUpdates];
-}
-
-- (void)observableObject:(id <TSTObservable>)observable didChangeObject:(id)anObject atIndex:(NSUInteger)index1 forChangeType:(TSTListenerChangeType)type userInfo:(NSMutableDictionary *)userInfo {
-    
-    switch (type)
-    {
-        case TSTListenerChangeTypeInsert:
-            [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        case TSTListenerChangeTypeDelete:
-            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-        case TSTListenerChangeTypeUpdate:
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-    }
-}
-
-- (void)observableObjectDidChangeContent:(id <TSTObservable>)observable userInfo:(NSMutableDictionary *)userInfo {
-    [self.tableView endUpdates];
-}
-
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
     return YES;
 }
 

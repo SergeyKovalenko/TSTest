@@ -12,20 +12,38 @@
 #import "TSTPerson.h"
 #import "TSTPersonCollectionViewCell.h"
 #import "TSTPersonDetailsTableViewController.h"
+#import "TSTListsViewMediator.h"
 
 @interface TSTPersonsCollectionViewController () <TSTListener>
 
 @property (nonatomic, strong) id <TSTDataProvider, TSTObservable> dataProvider;
+@property (nonatomic, strong) TSTListsViewMediator *collectionViewMediator;
+
 
 @end
 
 @implementation TSTPersonsCollectionViewController
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    
+    if (self) {
+        _dataProvider = [TSTAppDelegate sharedDelegate].dataProvider;
+        _collectionViewMediator = [[TSTListsViewMediator alloc] init];
+    }
+    
+    return self;
+}
+
+- (void)dealloc {
+    [self.dataProvider removeListener:_collectionViewMediator];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dataProvider = [TSTAppDelegate sharedDelegate].dataProvider;
-    [self.dataProvider addListener:self];
+    self.collectionViewMediator.collectionView = self.collectionView;
+    [self.dataProvider addListener:self.collectionViewMediator];
 
     self.navigationItem.rightBarButtonItem = [self addPersonButton];
 }
@@ -54,40 +72,6 @@
     [cell setupWithPerson:person];
     
     return cell;
-}
-
-#pragma mark - TSTListener protocol methods
-
-- (void)observableObjectWillChangeContent:(id <TSTObservable>)observable userInfo:(NSMutableDictionary *)userInfo {
-
-}
-
-- (void)observableObject:(id <TSTObservable>)observable didChangeObject:(id)anObject atIndex:(NSUInteger)index1 forChangeType:(TSTListenerChangeType)type userInfo:(NSMutableDictionary *)userInfo {
-    
-    [self.collectionView performBatchUpdates:^{
-        switch (type)
-        {
-            case TSTListenerChangeTypeInsert:
-                [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:index1 inSection:0]]];
-                
-                break;
-            case TSTListenerChangeTypeDelete:
-                [self.collectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:index1 inSection:0]]];
-                
-                break;
-            case TSTListenerChangeTypeUpdate:
-                [self.collectionView reloadItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:index1 inSection:0]]];
-                
-                break;
-        }
-
-    } completion:^(BOOL finished) {
-        
-    }];
-}
-
-- (void)observableObjectDidChangeContent:(id <TSTObservable>)observable userInfo:(NSMutableDictionary *)userInfo {
-
 }
 
 #pragma mark - Interface orientation methods

@@ -50,7 +50,7 @@ static NSString * const TSTDataProviderObservingKey = @"backingObjects";
 {
     if (self.listeners.count)
     {
-        [self removeObserver:self forKeyPath:@"objects" context:TSTDataProviderObserveContext];
+        [self removeObserver:self forKeyPath:TSTDataProviderObservingKey context:TSTDataProviderObserveContext];
     }
 }
 
