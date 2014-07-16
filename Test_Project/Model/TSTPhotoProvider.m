@@ -10,6 +10,10 @@
 #import "TSTDataProvider.h"
 #import <FlickrKit/FlickrKit.h>
 #import "TSTObservable+Protected.h"
+#import "FKDUDefaultDiskCache.h"
+#import "FKUtilities.h"
+#import "FKDUNetworkOperation.h"
+#import <objc/runtime.h>
 
 const NSUInteger TSTPhotoProviderDefaultPageSize = 100;
 
@@ -63,7 +67,7 @@ const NSUInteger TSTPhotoProviderDefaultPageSize = 100;
         if (response) {
             NSMutableArray *photoURLs = [NSMutableArray array];
             for (NSDictionary *photoData in [response valueForKeyPath:@"photos.photo"]) {
-                NSURL *url = [fk photoURLForSize:FKPhotoSizeSmall240 fromPhotoDictionary:photoData];
+                NSURL *url = [fk photoURLForSize:FKPhotoSizeLarge1024 fromPhotoDictionary:photoData];
                 [photoURLs addObject:url];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -75,16 +79,57 @@ const NSUInteger TSTPhotoProviderDefaultPageSize = 100;
     }];
 }
 
-- (void)imageForIndex:(NSUInteger)idx withBlock:(void (^)(UIImage *image))fetchBlock {
+- (FKDUNetworkOperation *)associatedOperationForObject:(id)object
+{
+    return objc_getAssociatedObject(object, @selector(associatedOperationForObject:));
+}
+
+- (void)setAssociatedOperation:(FKDUNetworkOperation *)operation forObject:(id)object
+{
+    objc_setAssociatedObject(object, @selector(associatedOperationForObject:), operation, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (void)imageForIndex:(NSUInteger)idx associatedObject:(id)object withBlock:(void (^)(UIImage *image))fetchBlock
+{
     if (fetchBlock) {
         NSURL *photoURL = [self.dataProvider objectAtIndex:idx];
+        
         dispatch_queue_t downloadQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        
         dispatch_async(downloadQueue, ^{
-            NSData *data = [NSData dataWithContentsOfURL:photoURL];
-            UIImage *image = [[UIImage alloc] initWithData:data];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                fetchBlock(image);
-            });
+            
+            FKDUNetworkOperation *previousOperation = [self associatedOperationForObject:object];
+            if (previousOperation && ![previousOperation.request.URL isEqual:photoURL]) {
+                [previousOperation cancel];
+                [self setAssociatedOperation:nil forObject:object];
+            }
+            
+            NSString *key = FKMD5FromString(photoURL.absoluteString);
+            
+            NSData *data = [[FKDUDefaultDiskCache sharedDiskCache] dataForKey:key maxAgeMinutes:FKDUMaxAgeInfinite];
+            
+            void(^notifyBlock)(NSData *) = ^(NSData *imageData) {
+                UIImage *image = [[UIImage alloc] initWithData:imageData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    fetchBlock(image);
+                });
+            };
+            
+            if (!data) {
+                FKDUNetworkOperation *imageOperation = [[FKDUNetworkOperation alloc] initWithURL:photoURL];
+                [imageOperation sendAsyncRequestOnCompletion:^(NSURLResponse *response, NSData *data, NSError *error) {
+                    dispatch_async(downloadQueue, ^{
+                        [[FKDUDefaultDiskCache sharedDiskCache] storeData:data forKey:key];
+                    });
+                    notifyBlock(data);
+                }];
+                
+                [self setAssociatedOperation:imageOperation forObject:object];
+            } else {
+                
+                [self setAssociatedOperation:nil forObject:object];
+                notifyBlock(data);
+            }
         });
     }
 }

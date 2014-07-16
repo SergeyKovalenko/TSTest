@@ -189,6 +189,8 @@
 				2B925236195C73250089B82C /* TSTDataProvider.m */,
 				2B92523E195CE3AB0089B82C /* TSTDataProvider+TSTFileUtils.h */,
 				2B92523F195CE3AB0089B82C /* TSTDataProvider+TSTFileUtils.m */,
+				2BC55D1C197555F800EBDCFC /* TSTPhotoProvider.h */,
+				2BC55D1D197555F800EBDCFC /* TSTPhotoProvider.m */,
 			);
 			name = DataProvider;
 			sourceTree = "<group>";
@@ -287,8 +289,6 @@
 				2BD04A14195D585B0087EDFE /* TSTModel.m */,
 				E1B881E91950A69100CE810D /* TSTPerson.h */,
 				E1B881EA1950A69100CE810D /* TSTPerson.m */,
-				2BC55D1C197555F800EBDCFC /* TSTPhotoProvider.h */,
-				2BC55D1D197555F800EBDCFC /* TSTPhotoProvider.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";

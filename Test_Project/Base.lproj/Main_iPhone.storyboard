@@ -18,7 +18,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="rPZ-KD-lGD">
-                        <barButtonItem key="leftBarButtonItem" title="fliker" id="gLH-dS-7ha">
+                        <barButtonItem key="leftBarButtonItem" title="Flickr" id="gLH-dS-7ha">
                             <connections>
                                 <segue destination="63r-2J-xN6" kind="push" id="pZh-1n-MRb"/>
                             </connections>

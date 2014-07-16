@@ -49,6 +49,7 @@
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:123];
     imageView.image = nil;
     [self.provider imageForIndex:indexPath.item
+                associatedObject:cell
                        withBlock:^(UIImage *image) {
                            imageView.image = image;
                        }];

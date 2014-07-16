@@ -16,6 +16,6 @@ extern const NSUInteger TSTPhotoProviderDefaultPageSize;
 - (id)initWithPageSize:(NSUInteger)pageSize;
 
 - (void)fetchNextPage;
-- (void)imageForIndex:(NSUInteger)idx withBlock:(void (^)(UIImage *image))fetchBlock;
+- (void)imageForIndex:(NSUInteger)idx associatedObject:(id)object withBlock:(void (^)(UIImage *image))fetchBlock;
 - (NSUInteger)count;
 @end
