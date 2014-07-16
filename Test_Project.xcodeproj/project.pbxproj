@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B1AB580196D8ECA006DC9FD /* TSTPersonsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B1AB57F196D8ECA006DC9FD /* TSTPersonsCollectionViewController.m */; };
+		2B67B98119768BBF009DB6C9 /* TSTListsViewMediator.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67B98019768BBF009DB6C9 /* TSTListsViewMediator.m */; };
 		2B925237195C73250089B82C /* TSTDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B925236195C73250089B82C /* TSTDataProvider.m */; };
 		2B92523B195CD21E0089B82C /* TSTPersonTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B92523A195CD21E0089B82C /* TSTPersonTest.m */; };
 		2B92523D195CDC1C0089B82C /* contacts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B92523C195CDC1C0089B82C /* contacts.plist */; };
@@ -28,7 +29,6 @@
 		E1B881B61950A46A00CE810D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B881B51950A46A00CE810D /* main.m */; };
 		E1B881BA1950A46A00CE810D /* TSTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B881B91950A46A00CE810D /* TSTAppDelegate.m */; };
 		E1B881BD1950A46A00CE810D /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1B881BB1950A46A00CE810D /* Main_iPhone.storyboard */; };
-		E1B881C01950A46A00CE810D /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1B881BE1950A46A00CE810D /* Main_iPad.storyboard */; };
 		E1B881C51950A46A00CE810D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B881C41950A46A00CE810D /* Images.xcassets */; };
 		E1B881CC1950A46A00CE810D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B881CB1950A46A00CE810D /* XCTest.framework */; };
 		E1B881CD1950A46A00CE810D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B881A91950A46A00CE810D /* Foundation.framework */; };
@@ -53,6 +53,8 @@
 		1D69FE9FAEA14B12B9C2533A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		2B1AB57E196D8ECA006DC9FD /* TSTPersonsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPersonsCollectionViewController.h; sourceTree = "<group>"; };
 		2B1AB57F196D8ECA006DC9FD /* TSTPersonsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonsCollectionViewController.m; sourceTree = "<group>"; };
+		2B67B97F19768BBF009DB6C9 /* TSTListsViewMediator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTListsViewMediator.h; sourceTree = "<group>"; };
+		2B67B98019768BBF009DB6C9 /* TSTListsViewMediator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTListsViewMediator.m; sourceTree = "<group>"; };
 		2B925235195C73250089B82C /* TSTDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTDataProvider.h; sourceTree = "<group>"; };
 		2B925236195C73250089B82C /* TSTDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTDataProvider.m; sourceTree = "<group>"; };
 		2B92523A195CD21E0089B82C /* TSTPersonTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSTPersonTest.m; path = Test_ProjectTests/TSTPersonTest.m; sourceTree = SOURCE_ROOT; };
@@ -73,8 +75,8 @@
 		2BD04A2A195D7F510087EDFE /* TSTPersonDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonDetailsTableViewController.m; sourceTree = "<group>"; };
 		2BFCAE58196D7CC800D650C9 /* TSTPersonsContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPersonsContainerViewController.h; sourceTree = "<group>"; };
 		2BFCAE59196D7CC800D650C9 /* TSTPersonsContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonsContainerViewController.m; sourceTree = "<group>"; };
-		7099FDDC1955B2F00088F93A /* TSTPersonDescriptionFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPersonDescriptionFormatter.h; sourceTree = "<group>"; };
-		7099FDDD1955B2F00088F93A /* TSTPersonDescriptionFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonDescriptionFormatter.m; sourceTree = "<group>"; };
+		7099FDDC1955B2F00088F93A /* TSTPersonDescriptionFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSTPersonDescriptionFormatter.h; path = ../TSTPersonDescriptionFormatter.h; sourceTree = "<group>"; };
+		7099FDDD1955B2F00088F93A /* TSTPersonDescriptionFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSTPersonDescriptionFormatter.m; path = ../TSTPersonDescriptionFormatter.m; sourceTree = "<group>"; };
 		799ED3AC6DCC46D5B121F81C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1B881A61950A46A00CE810D /* Test_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1B881A91950A46A00CE810D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -87,7 +89,6 @@
 		E1B881B81950A46A00CE810D /* TSTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSTAppDelegate.h; sourceTree = "<group>"; };
 		E1B881B91950A46A00CE810D /* TSTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSTAppDelegate.m; sourceTree = "<group>"; };
 		E1B881BC1950A46A00CE810D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		E1B881BF1950A46A00CE810D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		E1B881C41950A46A00CE810D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E1B881CA1950A46A00CE810D /* Test_ProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test_ProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1B881CB1950A46A00CE810D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -125,6 +126,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B67B97C197684AF009DB6C9 /* UIViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				2BD04A29195D7F510087EDFE /* TSTPersonDetailsTableViewController.h */,
+				2BD04A2A195D7F510087EDFE /* TSTPersonDetailsTableViewController.m */,
+				2BFCAE58196D7CC800D650C9 /* TSTPersonsContainerViewController.h */,
+				2BFCAE59196D7CC800D650C9 /* TSTPersonsContainerViewController.m */,
+				2B925241195CE5820089B82C /* TSTPersonsTableViewController.h */,
+				2B925242195CE5820089B82C /* TSTPersonsTableViewController.m */,
+				2B1AB57E196D8ECA006DC9FD /* TSTPersonsCollectionViewController.h */,
+				2B1AB57F196D8ECA006DC9FD /* TSTPersonsCollectionViewController.m */,
+				2BC55D2B1975633000EBDCFC /* TSTGalleryViewController.h */,
+				2BC55D2C1975633000EBDCFC /* TSTGalleryViewController.m */,
+			);
+			name = UIViewControllers;
+			sourceTree = "<group>";
+		};
+		2B67B97E1976852C009DB6C9 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2BD04A25195D5F0E0087EDFE /* Listener */,
+				2BD04A23195D5EF90087EDFE /* DataProvider */,
+				7099FDDC1955B2F00088F93A /* TSTPersonDescriptionFormatter.h */,
+				7099FDDD1955B2F00088F93A /* TSTPersonDescriptionFormatter.m */,
+				2B67B97F19768BBF009DB6C9 /* TSTListsViewMediator.h */,
+				2B67B98019768BBF009DB6C9 /* TSTListsViewMediator.m */,
+			);
+			name = Controllers;
+			path = Model;
+			sourceTree = "<group>";
+		};
 		2BD04A23195D5EF90087EDFE /* DataProvider */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,25 +214,14 @@
 		E1B881AF1950A46A00CE810D /* Test_Project */ = {
 			isa = PBXGroup;
 			children = (
+				2B67B97E1976852C009DB6C9 /* Controllers */,
 				E1B881E81950A69100CE810D /* Model */,
 				E1B881B81950A46A00CE810D /* TSTAppDelegate.h */,
 				E1B881B91950A46A00CE810D /* TSTAppDelegate.m */,
-				E1B881BB1950A46A00CE810D /* Main_iPhone.storyboard */,
-				E1B881BE1950A46A00CE810D /* Main_iPad.storyboard */,
-				2BD04A29195D7F510087EDFE /* TSTPersonDetailsTableViewController.h */,
-				2BD04A2A195D7F510087EDFE /* TSTPersonDetailsTableViewController.m */,
-				2BFCAE58196D7CC800D650C9 /* TSTPersonsContainerViewController.h */,
-				2BFCAE59196D7CC800D650C9 /* TSTPersonsContainerViewController.m */,
-				2B925241195CE5820089B82C /* TSTPersonsTableViewController.h */,
-				2B925242195CE5820089B82C /* TSTPersonsTableViewController.m */,
-				2B1AB57E196D8ECA006DC9FD /* TSTPersonsCollectionViewController.h */,
-				2B1AB57F196D8ECA006DC9FD /* TSTPersonsCollectionViewController.m */,
-				2BC55D2B1975633000EBDCFC /* TSTGalleryViewController.h */,
-				2BC55D2C1975633000EBDCFC /* TSTGalleryViewController.m */,
+				2B67B97C197684AF009DB6C9 /* UIViewControllers */,
 				E1B881C41950A46A00CE810D /* Images.xcassets */,
+				E1B881BB1950A46A00CE810D /* Main_iPhone.storyboard */,
 				E1B881B01950A46A00CE810D /* Supporting Files */,
-				7099FDDC1955B2F00088F93A /* TSTPersonDescriptionFormatter.h */,
-				7099FDDD1955B2F00088F93A /* TSTPersonDescriptionFormatter.m */,
 			);
 			path = Test_Project;
 			sourceTree = "<group>";
@@ -239,8 +260,6 @@
 		E1B881E81950A69100CE810D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2BD04A25195D5F0E0087EDFE /* Listener */,
-				2BD04A23195D5EF90087EDFE /* DataProvider */,
 				2BD04A13195D585B0087EDFE /* TSTModel.h */,
 				2BD04A14195D585B0087EDFE /* TSTModel.m */,
 				E1B881E91950A69100CE810D /* TSTPerson.h */,
@@ -331,7 +350,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BC55D1B1975542A00EBDCFC /* Podfile in Resources */,
-				E1B881C01950A46A00CE810D /* Main_iPad.storyboard in Resources */,
 				E1B881C51950A46A00CE810D /* Images.xcassets in Resources */,
 				E1B881BD1950A46A00CE810D /* Main_iPhone.storyboard in Resources */,
 				E1B881B41950A46A00CE810D /* InfoPlist.strings in Resources */,
@@ -394,6 +412,7 @@
 				2BD04A2B195D7F510087EDFE /* TSTPersonDetailsTableViewController.m in Sources */,
 				2B925237195C73250089B82C /* TSTDataProvider.m in Sources */,
 				2B925240195CE3AB0089B82C /* TSTDataProvider+TSTFileUtils.m in Sources */,
+				2B67B98119768BBF009DB6C9 /* TSTListsViewMediator.m in Sources */,
 				E1B881BA1950A46A00CE810D /* TSTAppDelegate.m in Sources */,
 				2B925243195CE5820089B82C /* TSTPersonsTableViewController.m in Sources */,
 				2B1AB580196D8ECA006DC9FD /* TSTPersonsCollectionViewController.m in Sources */,
@@ -438,14 +457,6 @@
 				E1B881BC1950A46A00CE810D /* Base */,
 			);
 			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		E1B881BE1950A46A00CE810D /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E1B881BF1950A46A00CE810D /* Base */,
-			);
-			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		E1B881D41950A46A00CE810D /* InfoPlist.strings */ = {

@@ -84,7 +84,8 @@ static NSString * const TSTDataProviderObservingKey = @"backingObjects";
 
 - (void)addObjectsFromArray:(NSArray *)objects
 {
-    [self.proxyObjects addObjectsFromArray:objects];
+    NSIndexSet *insertIndex = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(self.count, objects.count)];
+    [self.proxyObjects insertObjects:objects atIndexes:insertIndex];
 }
 
 - (void)removeObject:(id)anObject
@@ -172,24 +173,26 @@ static NSString * const TSTDataProviderObservingKey = @"backingObjects";
         NSNumber *isPriorNotification = change[NSKeyValueChangeNotificationIsPriorKey];
         if (isPriorNotification.boolValue)
         {
-            if (!self.isNotifying) {
-                [self notifyWillChangeContent:[change mutableCopy]];
-            }
+            [self notifyWillChangeContent:[change mutableCopy]];
         }
         else
         {
             
             [self notifyDidChange:change];
-    
-            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(notifyDidChangeContent:) object:[change mutableCopy]];
-            [self performSelector:@selector(notifyDidChangeContent:) withObject:[change mutableCopy] afterDelay:0.1];
+            
+            [self notifyDidChangeContent:[change mutableCopy]];
         }
     }
 }
 
 - (void)notifyDidChange:(NSDictionary *)change {
-    void(^notifyBlock)(NSIndexSet *, NSArray *, TSTListenerChangeType) =
-    ^(NSIndexSet *indexes, NSArray *changedCollection, TSTListenerChangeType type) {
+    
+    NSIndexSet *indexes = change[NSKeyValueChangeIndexesKey];
+    NSKeyValueChange changeKind = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
+
+    void(^notifyBlock)(NSArray *, TSTListenerChangeType) =
+    ^(NSArray *changedCollection, TSTListenerChangeType type) {
+        
         NSEnumerator *objectEnumeration = [changedCollection objectEnumerator];
         
         [indexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop)
@@ -200,18 +203,17 @@ static NSString * const TSTDataProviderObservingKey = @"backingObjects";
          }];
     };
     
-    NSKeyValueChange changeKind = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
     switch (changeKind)
     {
         case NSKeyValueChangeRemoval:
-            notifyBlock(change[NSKeyValueChangeIndexesKey], change[NSKeyValueChangeOldKey], TSTListenerChangeTypeDelete);
+            notifyBlock(change[NSKeyValueChangeOldKey], TSTListenerChangeTypeDelete);
             break;
         case NSKeyValueChangeReplacement:
-            notifyBlock(change[NSKeyValueChangeIndexesKey], change[NSKeyValueChangeOldKey], TSTListenerChangeTypeDelete);
-            notifyBlock(change[NSKeyValueChangeIndexesKey], change[NSKeyValueChangeNewKey], TSTListenerChangeTypeInsert);
+            notifyBlock(change[NSKeyValueChangeOldKey], TSTListenerChangeTypeDelete);
+            notifyBlock(change[NSKeyValueChangeNewKey], TSTListenerChangeTypeInsert);
             break;
         case NSKeyValueChangeInsertion:
-            notifyBlock(change[NSKeyValueChangeIndexesKey], change[NSKeyValueChangeNewKey], TSTListenerChangeTypeInsert);
+            notifyBlock(change[NSKeyValueChangeNewKey], TSTListenerChangeTypeInsert);
             break;
         case NSKeyValueChangeSetting:
             NSAssert(NO, @"NSKeyValueChangeSetting is undefined NSKeyValueChangeKindKey");

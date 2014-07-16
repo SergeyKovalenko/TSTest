@@ -8,40 +8,35 @@
 
 #import "TSTGalleryViewController.h"
 #import "TSTPhotoProvider.h"
+#import "TSTListsViewMediator.h"
 
-@interface TSTGalleryViewController () <TSTListener>
+@interface TSTGalleryViewController ()
 @property (nonatomic, strong) TSTPhotoProvider *provider;
+@property (nonatomic, strong) TSTListsViewMediator *collectionViewMediator;
+
 @end
 
 @implementation TSTGalleryViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        
-    }
-    return self;
-}
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         _provider = [[TSTPhotoProvider alloc] init];
+        _collectionViewMediator = [[TSTListsViewMediator alloc] init];
     }
     return self;
 }
 
 - (void)dealloc {
-    [_provider removeListener:self];
+    [_provider removeListener:_collectionViewMediator];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.provider addListener:self];
+    self.collectionViewMediator.collectionView = self.collectionView;
+    [self.provider addListener:self.collectionViewMediator];
     [self.provider fetchNextPage];
 }
 
@@ -49,7 +44,6 @@
     return [self.provider count];
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:123];
@@ -65,12 +59,5 @@
     
     return cell;
 }
-
-
-- (void)observableObjectDidChangeContent:(id <TSTObservable>)observable userInfo:(NSMutableDictionary *)userInfo {
-    [self.collectionView reloadData];
-}
-
-
 
 @end

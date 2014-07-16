@@ -81,8 +81,8 @@
     self.testPerson = [self.dataProvider objectAtIndex:self.dataProvider.count - 1];
     [self.dataProvider removeObject:self.testPerson];
     XCTAssertTrue(self.willChangeCount == 1);
-    NSDate *finish = [NSDate dateWithTimeIntervalSinceNow:10];
     
+    NSDate *finish = [NSDate dateWithTimeIntervalSinceNow:10];
     while (self.didChangeCount != 1 && [[finish laterDate:[NSDate date]] isEqualToDate:finish]) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
