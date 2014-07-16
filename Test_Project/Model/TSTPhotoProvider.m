@@ -34,7 +34,7 @@ const NSUInteger TSTPhotoProviderDefaultPageSize = 100;
     if (self)
     {
         _photoRequest = [[FKFlickrInterestingnessGetList alloc] init];
-        _photoRequest.per_page = [NSString stringWithFormat:@"%d", pageSize];
+        _photoRequest.per_page = [NSString stringWithFormat:@"%lu", (unsigned long)pageSize];
         
         _dataProvider = [[TSTDataProvider alloc] init];
         [_dataProvider addListener:self];
@@ -56,7 +56,7 @@ const NSUInteger TSTPhotoProviderDefaultPageSize = 100;
     
     __weak typeof(self) weakSelf = self;
 
-    self.photoRequest.page = [NSString stringWithFormat:@"%d", [self nextPage]];
+    self.photoRequest.page = [NSString stringWithFormat:@"%lu", (unsigned long)[self nextPage]];
     
     [fk call:self.photoRequest completion:^(NSDictionary *response, NSError *error) {
         // Note this is not the main thread!

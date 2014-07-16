@@ -23,6 +23,8 @@
 - (void)insertObject:(id)anObject atIndex:(NSUInteger)index;
 - (void)removeObjectAtIndex:(NSUInteger)index;
 
+- (void)replaceObjectsAtIndexes:(NSIndexSet *)indexes withObjects:(NSArray *)objects;
+
 @end
 
 @interface TSTDataProvider : TSTObservable <TSTDataProvider>
