@@ -51,13 +51,18 @@
     [self.provider imageForIndex:indexPath.item
                 associatedObject:cell
                        withBlock:^(UIImage *image) {
-                           imageView.image = image;
+                           [UIView transitionWithView:imageView
+                                             duration:1.0f
+                                              options:UIViewAnimationOptionTransitionCrossDissolve
+                                           animations:^{
+                                               imageView.image = image;
+                                           } completion:nil];
                        }];
-    
+
     if (indexPath.item == self.provider.count - 1){
         [self.provider fetchNextPage];
     }
-    
+
     return cell;
 }
 
