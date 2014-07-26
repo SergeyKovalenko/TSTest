@@ -13,6 +13,8 @@
 		2B92523D195CDC1C0089B82C /* contacts.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B92523C195CDC1C0089B82C /* contacts.plist */; };
 		2B925240195CE3AB0089B82C /* TSTDataProvider+TSTFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B92523F195CE3AB0089B82C /* TSTDataProvider+TSTFileUtils.m */; };
 		2B925243195CE5820089B82C /* TSTPersonsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B925242195CE5820089B82C /* TSTPersonsTableViewController.m */; };
+		2B9BE24C19839EAD009FE58B /* TSTParseAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9BE24B19839EAD009FE58B /* TSTParseAPI.m */; };
+		2B9E5E141983A8D100E5DB44 /* TSTNetworkClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9E5E131983A8D100E5DB44 /* TSTNetworkClient.m */; };
 		2BD04A15195D585B0087EDFE /* TSTModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD04A14195D585B0087EDFE /* TSTModel.m */; };
 		2BD04A2B195D7F510087EDFE /* TSTPersonDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD04A2A195D7F510087EDFE /* TSTPersonDetailsTableViewController.m */; };
 		2BFCAE5A196D7CC800D650C9 /* TSTPersonsContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BFCAE59196D7CC800D650C9 /* TSTPersonsContainerViewController.m */; };
@@ -56,6 +58,10 @@
 		2B92523F195CE3AB0089B82C /* TSTDataProvider+TSTFileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TSTDataProvider+TSTFileUtils.m"; sourceTree = "<group>"; };
 		2B925241195CE5820089B82C /* TSTPersonsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTPersonsTableViewController.h; sourceTree = "<group>"; };
 		2B925242195CE5820089B82C /* TSTPersonsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTPersonsTableViewController.m; sourceTree = "<group>"; };
+		2B9BE24A19839EAD009FE58B /* TSTParseAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTParseAPI.h; sourceTree = "<group>"; };
+		2B9BE24B19839EAD009FE58B /* TSTParseAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTParseAPI.m; sourceTree = "<group>"; };
+		2B9E5E121983A8D100E5DB44 /* TSTNetworkClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSTNetworkClient.h; path = ../TSTNetworkClient.h; sourceTree = "<group>"; };
+		2B9E5E131983A8D100E5DB44 /* TSTNetworkClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSTNetworkClient.m; path = ../TSTNetworkClient.m; sourceTree = "<group>"; };
 		2BD04A13195D585B0087EDFE /* TSTModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSTModel.h; sourceTree = "<group>"; };
 		2BD04A14195D585B0087EDFE /* TSTModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSTModel.m; sourceTree = "<group>"; };
 		2BD04A26195D673D0087EDFE /* TSTObservable+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TSTObservable+Protected.h"; sourceTree = "<group>"; };
@@ -113,6 +119,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B9BE24919839E93009FE58B /* API */ = {
+			isa = PBXGroup;
+			children = (
+				2B9E5E121983A8D100E5DB44 /* TSTNetworkClient.h */,
+				2B9E5E131983A8D100E5DB44 /* TSTNetworkClient.m */,
+				2B9BE24A19839EAD009FE58B /* TSTParseAPI.h */,
+				2B9BE24B19839EAD009FE58B /* TSTParseAPI.m */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 		2BD04A23195D5EF90087EDFE /* DataProvider */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +184,7 @@
 		E1B881AF1950A46A00CE810D /* Test_Project */ = {
 			isa = PBXGroup;
 			children = (
+				2B9BE24919839E93009FE58B /* API */,
 				E1B881E81950A69100CE810D /* Model */,
 				E1B881B81950A46A00CE810D /* TSTAppDelegate.h */,
 				E1B881B91950A46A00CE810D /* TSTAppDelegate.m */,
@@ -337,10 +355,12 @@
 				2BD04A15195D585B0087EDFE /* TSTModel.m in Sources */,
 				2BD04A2B195D7F510087EDFE /* TSTPersonDetailsTableViewController.m in Sources */,
 				2B925237195C73250089B82C /* TSTDataProvider.m in Sources */,
+				2B9E5E141983A8D100E5DB44 /* TSTNetworkClient.m in Sources */,
 				2B925240195CE3AB0089B82C /* TSTDataProvider+TSTFileUtils.m in Sources */,
 				E1B881BA1950A46A00CE810D /* TSTAppDelegate.m in Sources */,
 				2B925243195CE5820089B82C /* TSTPersonsTableViewController.m in Sources */,
 				2B1AB580196D8ECA006DC9FD /* TSTPersonsCollectionViewController.m in Sources */,
+				2B9BE24C19839EAD009FE58B /* TSTParseAPI.m in Sources */,
 				E1B881B61950A46A00CE810D /* main.m in Sources */,
 				ED86FC3F68B90661E7B04F2E /* TSTObservable.m in Sources */,
 				2BFCAE5A196D7CC800D650C9 /* TSTPersonsContainerViewController.m in Sources */,
